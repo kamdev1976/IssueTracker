@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = IssueTracker.Core
-build_property.ProjectDir = C:\Users\ksahoo\source\repos\IssueTrackerVascor\IssueTracker.Core\
+build_property.ProjectDir = C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false

@@ -8,3 +8,13 @@ C:\Users\ksahoo\source\repos\IssueTrackerVascor\IssueTracker.Core\obj\Debug\net4
 C:\Users\ksahoo\source\repos\IssueTrackerVascor\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.sourcelink.json
 C:\Users\ksahoo\source\repos\IssueTrackerVascor\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.dll
 C:\Users\ksahoo\source\repos\IssueTrackerVascor\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.pdb
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\bin\Debug\net48\IssueTracker.Core.dll
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\bin\Debug\net48\IssueTracker.Core.pdb
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.csproj.AssemblyReference.cache
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.AssemblyInfoInputs.cache
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.AssemblyInfo.cs
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.csproj.CoreCompileInputs.cache
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.sourcelink.json
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.dll
+C:\Users\ksahoo\source\repos\aspnetwebform_assignmenttest\IssueTracker.Core\obj\Debug\net48\IssueTracker.Core.pdb

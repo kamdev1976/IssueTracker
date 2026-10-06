@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Data\\IssueTracker.Data.csproj": {}
+    "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Data\\IssueTracker.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\IssueTracker.Core.csproj": {
+    "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\IssueTracker.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\IssueTracker.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\IssueTracker.Core.csproj",
         "projectName": "IssueTracker.Core",
-        "projectPath": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\IssueTracker.Core.csproj",
+        "projectPath": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\IssueTracker.Core.csproj",
         "packagesPath": "C:\\Users\\ksahoo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\obj\\",
+        "outputPath": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,14 +54,14 @@
         }
       }
     },
-    "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Data\\IssueTracker.Data.csproj": {
+    "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Data\\IssueTracker.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Data\\IssueTracker.Data.csproj",
+        "projectUniqueName": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Data\\IssueTracker.Data.csproj",
         "projectName": "IssueTracker.Data",
-        "projectPath": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Data\\IssueTracker.Data.csproj",
+        "projectPath": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Data\\IssueTracker.Data.csproj",
         "packagesPath": "C:\\Users\\ksahoo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Data\\obj\\",
+        "outputPath": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -83,8 +83,8 @@
           "net48": {
             "targetAlias": "net48",
             "projectReferences": {
-              "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\IssueTracker.Core.csproj": {
-                "projectPath": "C:\\Users\\ksahoo\\source\\repos\\IssueTrackerVascor\\IssueTracker.Core\\IssueTracker.Core.csproj"
+              "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\IssueTracker.Core.csproj": {
+                "projectPath": "C:\\Users\\ksahoo\\source\\repos\\aspnetwebform_assignmenttest\\IssueTracker.Core\\IssueTracker.Core.csproj"
               }
             }
           }

@@ -7,7 +7,6 @@
     <Property Name="IssueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AssignedTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Int32" Nullable="false" />

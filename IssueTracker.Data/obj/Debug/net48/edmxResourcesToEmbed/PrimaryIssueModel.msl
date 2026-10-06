@@ -7,7 +7,6 @@
           <ScalarProperty Name="IssueID" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Priority" ColumnName="Priority" />
           <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

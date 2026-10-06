@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IssueTracker.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+350102b9392e45c7dfe57e5e2270fac8ffe746e1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22f51d7f49e6b83415232b8d01ebee8b6a488807")]
 [assembly: System.Reflection.AssemblyProductAttribute("IssueTracker.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IssueTracker.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
