@@ -1,4 +1,5 @@
-﻿using IssueTracker.Core.Entities;
+﻿using Autofac;
+using IssueTracker.Core.Entities;
 using IssueTracker.Core.Interfaces;
 using IssueTracker.Data;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,6 +37,9 @@ namespace IssueTracker.Web
             set => _unitOfWork = value;
         }
 
+        /// <summary>
+        /// Handles page load events, initializing grid data on initial page request.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -44,30 +49,68 @@ namespace IssueTracker.Web
         }
 
         /// <summary>
-        /// Binds active issues (IsDeleted == 0) to the GridView with optional keyword search filtering.
+        /// Binds active issues (IsDeleted == 0) to the GridView with optional keyword search filtering, 
+        /// database-level pagination, and AsNoTracking optimization.
+        /// </summary>
+        /// <summary>
+        /// Binds active issues (IsDeleted == 0) to the GridView with optional keyword search filtering, 
+        /// dropdown search category support, database-level pagination, and AsNoTracking optimization.
         /// </summary>
         private void BindGrid()
         {
             var issueRepo = UnitOfWork.GetRepository<Issue>();
 
             string searchKeyword = ViewState["SearchKeyword"] as string ?? string.Empty;
+            string searchBy = ViewState["SearchBy"] as string ?? "All";
 
-            // Query active records directly without extra AsNoTracking() re-wrapping
-            var query = issueRepo.Find(i => i.IsDeleted == 0);
+            // Query active records with AsNoTracking optimization for read-only grid binding
+            var query = issueRepo.Find(i => i.IsDeleted == 0).AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(searchKeyword))
             {
                 searchKeyword = searchKeyword.Trim().ToLower();
 
-                // Added null checks to avoid runtime execution failures
-                query = query.Where(i => (i.Title != null && i.Title.ToLower().Contains(searchKeyword)) ||
-                                         (i.AssignedTo != null && i.AssignedTo.ToLower().Contains(searchKeyword)));
+                // Filter based on the selected criteria in ddlSearchBy
+                if (searchBy == "Title")
+                {
+                    query = query.Where(i => i.Title != null && i.Title.ToLower().Contains(searchKeyword));
+                }
+                else if (searchBy == "Priority")
+                {
+                    query = query.Where(i => i.Priority != null && i.Priority.ToLower().Contains(searchKeyword));
+                }
+                else if (searchBy == "AssignedTo")
+                {
+                    query = query.Where(i => i.AssignedTo != null && i.AssignedTo.ToLower().Contains(searchKeyword));
+                }
+                else // Default / "All"
+                {
+                    query = query.Where(i => (i.Title != null && i.Title.ToLower().Contains(searchKeyword)) ||
+                                             (i.Priority != null && i.Priority.ToLower().Contains(searchKeyword)) ||
+                                             (i.AssignedTo != null && i.AssignedTo.ToLower().Contains(searchKeyword)));
+                }
             }
 
-            gvIssues.DataSource = query.OrderByDescending(i => i.IssueID).ToList();
+            // Get total count for GridView pagination virtual item count
+            int totalRecords = query.Count();
+            gvIssues.VirtualItemCount = totalRecords;
+
+            // Apply database-level pagination using Skip and Take
+            int pageSize = gvIssues.PageSize;
+            int pageIndex = gvIssues.PageIndex;
+
+            var pagedData = query.OrderByDescending(i => i.IssueID)
+                                 .Skip(pageIndex * pageSize)
+                                 .Take(pageSize)
+                                 .ToList();
+
+            gvIssues.DataSource = pagedData;
             gvIssues.DataBind();
         }
 
+        /// <summary>
+        /// Handles the search button click event, saving filter criteria to ViewState and refreshing the grid.
+        /// </summary>
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             ViewState["SearchKeyword"] = txtSearch.Text;
@@ -76,6 +119,9 @@ namespace IssueTracker.Web
             BindGrid();
         }
 
+        /// <summary>
+        /// Clears search filters, resets pagination, and rebinds the grid to display all active issues.
+        /// </summary>
         protected void btnClear_Click(object sender, EventArgs e)
         {
             txtSearch.Text = string.Empty;
@@ -86,6 +132,9 @@ namespace IssueTracker.Web
             BindGrid();
         }
 
+        /// <summary>
+        /// Handles saving or updating an issue with robust server-side validation and exception handling.
+        /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
             // 1. Clear previous errors
@@ -157,6 +206,9 @@ namespace IssueTracker.Web
             ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", "closeModal();", true);
         }
 
+        /// <summary>
+        /// Executes the underlying database transaction to add a new issue or update an existing one.
+        /// </summary>
         private void SaveOrUpdateIssue()
         {
             int issueID = 0;
@@ -195,6 +247,9 @@ namespace IssueTracker.Web
             UnitOfWork.Complete();
         }
 
+        /// <summary>
+        /// Handles grid row command events for editing or deleting individual issue items.
+        /// </summary>
         protected void gvIssues_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditIssue")
@@ -241,6 +296,10 @@ namespace IssueTracker.Web
             }
         }
 
+        /// <summary>
+        /// Performs a soft delete operation on the specified issue by setting its IsDeleted flag.
+        /// </summary>
+        /// <param name="issueId">The ID of the issue to soft delete.</param>
         private void PerformSoftDelete(int issueId)
         {
             var issueRepo = UnitOfWork.GetRepository<Issue>();
@@ -258,12 +317,18 @@ namespace IssueTracker.Web
             }
         }
 
+        /// <summary>
+        /// Handles pagination index changes for the issues GridView.
+        /// </summary>
         protected void gvIssues_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvIssues.PageIndex = e.NewPageIndex;
             BindGrid();
         }
 
+        /// <summary>
+        /// Clears all input controls inside the issue management modal form.
+        /// </summary>
         private void ClearForm()
         {
             hfIssueID.Value = string.Empty;

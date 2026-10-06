@@ -37,7 +37,6 @@
 
         <div class="container my-4">
 
-            <!-- Navigation Links & Header -->
             <!-- Header & Navigation -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
@@ -53,7 +52,7 @@
             <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
 
-                    <!-- Search Section (Now Inside UpdatePanel) -->
+                    <!-- Search Section -->
                     <div class="card shadow-sm mb-4">
                         <div class="card-body">
                             <h5 class="card-title fw-bold mb-3">Search Issues</h5>
@@ -67,7 +66,12 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Type keyword to search..."></asp:TextBox>
+                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control"
+                                        placeholder="Type keyword to search..."
+                                        oninput="triggerLiveSearch(this);">
+                                     </asp:TextBox>
+                                    <input type="hidden" id="__activeSearchId" value="" />
+                                    <input type="hidden" id="__activeCursorPos" value="" />
                                 </div>
                                 <div class="col-md-3 d-flex gap-2">
                                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-outline-primary w-100" OnClick="btnSearch_Click" />
@@ -140,7 +144,6 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <!-- UpdatePanel Encloses Body and Footer -->
                     <asp:UpdatePanel ID="upModal" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="modal-body p-4">
@@ -188,8 +191,10 @@
 
     </form>
 
-    <!-- External Bootstrap 5 JS & Extracted Issue Tracker Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="Scripts/issue-tracker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var searchButtonId = '<%= btnSearch.ClientID %>';
+    </script>
 </body>
 </html>

@@ -14,11 +14,11 @@ namespace IssueTracker.Web
     /// </summary>
     public partial class Archive : Page
     {
+        private IUnitOfWork _unitOfWork;
+
         /// <summary>
         /// Gets or sets the Unit of Work dependency injected via Autofac.
         /// </summary>
-        private IUnitOfWork _unitOfWork;
-
         public IUnitOfWork UnitOfWork
         {
             get
@@ -41,7 +41,8 @@ namespace IssueTracker.Web
         }
 
         /// <summary>
-        /// Binds archived issues (IsDeleted == 1) to the GridView with optional search filtering.
+        /// Binds archived issues (IsDeleted == 1) to the GridView with optional search filtering, 
+        /// database-level pagination, and AsNoTracking optimization.
         /// </summary>
         private void BindArchiveGrid()
         {
@@ -51,8 +52,8 @@ namespace IssueTracker.Web
             string searchKeyword = ViewState["SearchKeyword"] as string ?? string.Empty;
             string searchBy = ViewState["SearchBy"] as string ?? "All";
 
-            // Query archived records only (IsDeleted == 1)
-            var query = issueRepo.Find(i => i.IsDeleted == 1);
+            // Query archived records only (IsDeleted == 1) with AsNoTracking optimization for performance
+            var query = issueRepo.Find(i => i.IsDeleted == 1).AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(searchKeyword))
             {
@@ -80,8 +81,21 @@ namespace IssueTracker.Web
                 }
             }
 
-            // Execute query and bind results
-            gvArchive.DataSource = query.OrderByDescending(i => i.IssueID).ToList();
+            // Get total record count for GridView custom virtual pagination
+            int totalRecords = query.Count();
+            gvArchive.VirtualItemCount = totalRecords;
+
+            // Apply database-level pagination using Skip and Take
+            int pageSize = gvArchive.PageSize;
+            int pageIndex = gvArchive.PageIndex;
+
+            var pagedData = query.OrderByDescending(i => i.IssueID)
+                                 .Skip(pageIndex * pageSize)
+                                 .Take(pageSize)
+                                 .ToList();
+
+            // Bind paged results to the GridView
+            gvArchive.DataSource = pagedData;
             gvArchive.DataBind();
         }
 

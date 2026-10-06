@@ -106,6 +106,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Issue-tracker-archived.js" />
     <Content Include="Scripts\issue-tracker.js" />
     <Content Include="Web.config" />
   </ItemGroup>

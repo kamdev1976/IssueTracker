@@ -58,7 +58,11 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Type keyword to search archive..."></asp:TextBox>
+                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Type keyword to search archive..."
+                                        oninput="triggerArchiveSearch(this);">
+                                      </asp:TextBox>
+                                    <input type="hidden" id="__activeSearchId" value="" />
+                                    <input type="hidden" id="__activeCursorPos" value="" />
                                 </div>
                                 <div class="col-md-3 d-flex gap-2">
                                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-outline-secondary w-100" OnClick="btnSearch_Click" />
@@ -79,6 +83,7 @@
                                     CssClass="table table-striped table-hover align-middle mb-0"
                                     DataKeyNames="IssueID"
                                     AllowPaging="True"
+                                    AllowCustomPaging="True"
                                     PageSize="5"
                                     OnRowCommand="gvArchive_RowCommand"
                                     OnPageIndexChanging="gvArchive_PageIndexChanging">
@@ -113,6 +118,13 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
+
+        <!-- Live Search Debounce Script -->
+       
     </form>
+    <script src="Scripts/Issue-tracker-archived.js" type="text/javascript"></script>
+     <script type="text/javascript">
+       var searchButtonId = '<%= btnSearch.ClientID %>';
+</script>
 </body>
 </html>

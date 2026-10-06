@@ -1,8 +1,9 @@
-﻿using System;
+﻿using IssueTracker.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using IssueTracker.Core.Interfaces;
+using System.Linq;
 
 namespace IssueTracker.Data
 {
@@ -49,18 +50,15 @@ namespace IssueTracker.Data
             {
                 return _context.SaveChanges();
             }
-            catch (DbEntityValidationException ex)
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                var errorMessages = new List<string>();
-                foreach (var validationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        errorMessages.Add($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
-                    }
-                }
+                // Extract specific validation errors into a clean message
+                var errorMessages = ex.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => $"{x.PropertyName}: {x.ErrorMessage}");
+
                 var fullErrorMessage = string.Join("; ", errorMessages);
-                throw new InvalidOperationException($"Validation failed: {fullErrorMessage}", ex);
+                throw new System.Exception($"Validation failed: {fullErrorMessage}", ex);
             }
         }
 
