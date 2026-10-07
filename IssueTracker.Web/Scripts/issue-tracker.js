@@ -84,16 +84,10 @@ function initModalListeners() {
 // Attach listener on initial page load
 document.addEventListener('DOMContentLoaded', initModalListeners);
 
-// Re-attach listener after ASP.NET UpdatePanel partial postbacks
-if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
-    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(initModalListeners);
-}
-// issue-tracker.js
 /**
  * issue-tracker.js
  * Handles client-side interactivity, live search debouncing, and modal behaviors for the Issue Tracker.
  */
-
 var searchTimer = null;
 
 /**
@@ -137,9 +131,13 @@ function triggerLiveSearch(txtBox) {
     }, 300);
 }
 
-// Automatically restore focus and precise cursor position after UpdatePanel refreshes
+// Unified ASP.NET Web Forms UpdatePanel postback handler for modal listeners and cursor/focus restoration
 if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
     Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+        // Re-attach modal listener after UpdatePanel refreshes
+        initModalListeners();
+
+        // Automatically restore focus and precise cursor position after UpdatePanel refreshes
         var hiddenFocus = document.getElementById('__activeSearchId');
         var hiddenCursor = document.getElementById('__activeCursorPos');
 

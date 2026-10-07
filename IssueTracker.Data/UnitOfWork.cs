@@ -52,13 +52,14 @@ namespace IssueTracker.Data
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                // Extract specific validation errors into a clean message
                 var errorMessages = ex.EntityValidationErrors
-                    .SelectMany(x => x.ValidationErrors)
-                    .Select(x => $"{x.PropertyName}: {x.ErrorMessage}");
+         .SelectMany(x => x.ValidationErrors)
+         .Select(x => $"{x.PropertyName}: {x.ErrorMessage}");
 
                 var fullErrorMessage = string.Join("; ", errorMessages);
-                throw new System.Exception($"Validation failed: {fullErrorMessage}", ex);
+
+                // Use a specific validation exception type instead of generic Exception
+                throw new System.ComponentModel.DataAnnotations.ValidationException($"Validation failed: {fullErrorMessage}", ex);
             }
         }
 

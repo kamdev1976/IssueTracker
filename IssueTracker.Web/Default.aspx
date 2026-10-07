@@ -92,7 +92,8 @@
                                     CssClass="table table-striped table-hover align-middle mb-0"
                                     DataKeyNames="IssueID"
                                     OnRowCommand="gvIssues_RowCommand"
-                                    AllowPaging="True"
+                                    AllowPaging="True" 
+                                    AllowCustomPaging="True"
                                     PageSize="5"
                                     OnPageIndexChanging="gvIssues_PageIndexChanging">
 
